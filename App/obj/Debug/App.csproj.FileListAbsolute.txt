@@ -1,0 +1,14 @@
+C:\Users\congn\source\repos\CONGNHAT0811\LPR\App\obj\Debug\App.csproj.AssemblyReference.cache
+C:\Users\congn\source\repos\CONGNHAT0811\LPR\App\obj\Debug\MainWindow.baml
+C:\Users\congn\source\repos\CONGNHAT0811\LPR\App\obj\Debug\MainWindow.g.cs
+C:\Users\congn\source\repos\CONGNHAT0811\LPR\App\obj\Debug\Views\ActiveVehiclesView.g.cs
+C:\Users\congn\source\repos\CONGNHAT0811\LPR\App\obj\Debug\Views\CamerasView.g.cs
+C:\Users\congn\source\repos\CONGNHAT0811\LPR\App\obj\Debug\Views\DashboardView.g.cs
+C:\Users\congn\source\repos\CONGNHAT0811\LPR\App\obj\Debug\Views\HistoryView.g.cs
+C:\Users\congn\source\repos\CONGNHAT0811\LPR\App\obj\Debug\Views\RecognitionView.g.cs
+C:\Users\congn\source\repos\CONGNHAT0811\LPR\App\obj\Debug\Views\ReportsView.g.cs
+C:\Users\congn\source\repos\CONGNHAT0811\LPR\App\obj\Debug\Views\SettingsView.g.cs
+C:\Users\congn\source\repos\CONGNHAT0811\LPR\App\obj\Debug\Views\UsersView.g.cs
+C:\Users\congn\source\repos\CONGNHAT0811\LPR\App\obj\Debug\App.g.cs
+C:\Users\congn\source\repos\CONGNHAT0811\LPR\App\obj\Debug\App_MarkupCompile.cache
+C:\Users\congn\source\repos\CONGNHAT0811\LPR\App\obj\Debug\App_MarkupCompile.lref

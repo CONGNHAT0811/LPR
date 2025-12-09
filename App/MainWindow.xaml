@@ -1,0 +1,89 @@
+﻿<Window x:Class="App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Smath Parking"
+        WindowStartupLocation="CenterScreen"
+        Height="720" Width="1280"
+        Background="#FFA2A2CE">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Heading -->
+        <Border Grid.Row="0" Background="#FF414CDC" Padding="10">
+            <Grid Margin="20,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           Text="HỆ THỐNG QUẢN LÝ BÃI GIỮ XE THÔNG MINH"
+                           Foreground="#FF082250"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           TextAlignment="Left" Margin="0,0,199,0"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <StackPanel Margin="0,0,25,0">
+                        <TextBlock Text="Ngày:" Foreground="#FF5A6A85" FontSize="11" Background="#FFC9C9C9"/>
+                        <TextBlock Text="21/12/2025" Foreground="#FF000000" FontSize="14" FontWeight="Bold"/>
+                    </StackPanel>
+                    <!-- Logout -->
+                    <Button Content="Đăng xuất"
+                            Padding="16,7"
+                            Background="#FFE53935"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            BorderThickness="4"
+                            Cursor="Hand"
+                            Command="{Binding LogoutCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <!-- MAIN CONTENT -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!-- SIDEBAR -->
+            <Border Background="#FFF4FFF2">
+                <StackPanel Margin="12" VerticalAlignment="Top">
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Height" Value="42"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Background" Value="#FF111827"/>
+                            <Setter Property="Margin" Value="0,12,0,0"/>
+                            <Setter Property="FontSize" Value="15"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF1F2937"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button Content="Trang Chủ"  CommandParameter="Home" Margin="0,30,0,13"/>
+                    <Button Content="Quản Lý"  CommandParameter="Management" Margin="0,12,0,13"/>
+                    <Button Content="Lịch Sử"  CommandParameter="History" Margin="0,12,0,13"/>
+
+                    <StackPanel HorizontalAlignment="Center" Margin="0,180,0,10">
+                        <Image Source="image\logo\HUMG.png" Width="80" Height="82" Stretch="UniformToFill"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" Background="#E2F0F2" Padding="8">
+                <ContentControl Content="{Binding CurrentView}"/>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,267 @@
+﻿<UserControl x:Class="App.Views.Statistics"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="#F2F6FA">
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Header -->
+            <RowDefinition Height="Auto"/>
+            <!-- Thống kê nhanh -->
+            <RowDefinition Height="10"/>
+            <!-- Khoảng cách -->
+            <RowDefinition Height="*"/>
+            <!-- Biểu đồ + bảng -->
+        </Grid.RowDefinitions>
+
+        <!-- ================== HEADER: TIÊU ĐỀ + CHỌN KHOẢNG THỜI GIAN ================== -->
+        <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Tiêu đề -->
+            <TextBlock Grid.Column="0"
+                       Text="THỐNG KÊ LƯỢT XE VÀ THU NHẬP"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="#2D4B65"
+                       VerticalAlignment="Center"/>
+
+            <!-- Bộ chọn khoảng thời gian -->
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center">
+
+                <!-- Kiểu thống kê: Ngày / Tuần / Tháng -->
+                <StackPanel Margin="0,0,10,0">
+                    <TextBlock Text="Khoảng thời gian"
+                               FontSize="12"
+                               Foreground="#4A5568"/>
+                    <ComboBox x:Name="TimeRangeComboBox"
+                              Width="130"
+                              Height="26"
+                              SelectedItem="{Binding SelectedRange}">
+                        <ComboBoxItem Content="Trong ngày"/>
+                        <ComboBoxItem Content="Trong tuần"/>
+                        <ComboBoxItem Content="Trong tháng"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- Chọn ngày gốc -->
+                <StackPanel Margin="0,0,10,0">
+                    <TextBlock Text="Chọn ngày"
+                               FontSize="12"
+                               Foreground="#4A5568"/>
+                    <DatePicker x:Name="BaseDatePicker"
+                                Width="140"
+                                Height="26"
+                                SelectedDate="{Binding SelectedDate}"/>
+                </StackPanel>
+
+                <!-- Nút xem thống kê -->
+                <StackPanel Margin="0,16,0,0">
+                    <Button x:Name="BtnRefreshStats"
+                            Content="Xem thống kê"
+                            Height="28"
+                            Padding="12,0"
+                            Background="#3182CE"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Cursor="Hand"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <!-- ================== HÀNG THỐNG KÊ NHANH ================== -->
+        <Grid Grid.Row="1" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Tổng lượt xe vào -->
+            <Border Grid.Column="0"
+                    Background="White"
+                    CornerRadius="12"
+                    BorderBrush="#D0D9E2"
+                    BorderThickness="1"
+                    Padding="12"
+                    Margin="0,0,10,0">
+                <StackPanel>
+                    <TextBlock Text="Tổng lượt xe vào"
+                               FontSize="13"
+                               Foreground="#4A5568"/>
+                    <TextBlock Text="{Binding TotalVehiclesIn}"
+                               FontSize="26"
+                               FontWeight="Bold"
+                               Foreground="#2B6CB0"
+                               Margin="0,4,0,0"/>
+                    <TextBlock Text="{Binding CurrentRangeLabel}"
+                               FontSize="11"
+                               Foreground="#A0AEC0"
+                               Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Tổng thu nhập -->
+            <Border Grid.Column="1"
+                    Background="White"
+                    CornerRadius="12"
+                    BorderBrush="#D0D9E2"
+                    BorderThickness="1"
+                    Padding="12"
+                    Margin="0,0,10,0">
+                <StackPanel>
+                    <TextBlock Text="Tổng thu nhập"
+                               FontSize="13"
+                               Foreground="#4A5568"/>
+                    <TextBlock Text="{Binding TotalRevenue}"
+                               FontSize="26"
+                               FontWeight="Bold"
+                               Foreground="#38A169"
+                               Margin="0,4,0,0"/>
+                    <TextBlock Text="{Binding CurrentRangeLabel}"
+                               FontSize="11"
+                               Foreground="#A0AEC0"
+                               Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Thu nhập trung bình / lượt -->
+            <Border Grid.Column="2"
+                    Background="White"
+                    CornerRadius="12"
+                    BorderBrush="#D0D9E2"
+                    BorderThickness="1"
+                    Padding="12">
+                <StackPanel>
+                    <TextBlock Text="Thu nhập trung bình / lượt"
+                               FontSize="13"
+                               Foreground="#4A5568"/>
+                    <TextBlock Text="{Binding AverageRevenuePerVehicle}"
+                               FontSize="26"
+                               FontWeight="Bold"
+                               Foreground="#D69E2E"
+                               Margin="0,4,0,0"/>
+                    <TextBlock Text="{Binding CurrentRangeLabel}"
+                               FontSize="11"
+                               Foreground="#A0AEC0"
+                               Margin="0,4,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- ================== KHU VỰC BIỂU ĐỒ + BẢNG ================== -->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ===== BÊN TRÁI: KHUNG BIỂU ĐỒ TRỰC QUAN ===== -->
+            <Border Grid.Column="0"
+                    Background="White"
+                    CornerRadius="12"
+                    BorderBrush="#D0D9E2"
+                    BorderThickness="1"
+                    Padding="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="Biểu đồ lượt xe và thu nhập theo mốc thời gian"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Foreground="#2D3748"
+                               Margin="0,0,0,8"/>
+
+                    <!-- Placeholder biểu đồ: sau này bạn có thể thay bằng control chart -->
+                    <Grid Grid.Row="1"
+                          Background="#F7FAFC"
+                          Margin="0">
+                        <!-- Trục ngang -->
+                        <Rectangle Height="1"
+                                   VerticalAlignment="Bottom"
+                                   Fill="#CBD5E0"
+                                   Margin="30,0,10,20"/>
+                        <!-- Trục dọc -->
+                        <Rectangle Width="1"
+                                   HorizontalAlignment="Left"
+                                   Fill="#CBD5E0"
+                                   Margin="30,10,0,20"/>
+
+                        <!-- Các cột demo, bạn có thể binding Height vào dữ liệu sau -->
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Margin="40,0,40,20">
+                            <Rectangle Width="20" Height="60" Margin="8,0" Fill="#63B3ED"/>
+                            <Rectangle Width="20" Height="90" Margin="8,0" Fill="#4299E1"/>
+                            <Rectangle Width="20" Height="40" Margin="8,0" Fill="#63B3ED"/>
+                            <Rectangle Width="20" Height="110" Margin="8,0" Fill="#4299E1"/>
+                            <Rectangle Width="20" Height="70" Margin="8,0" Fill="#63B3ED"/>
+                        </StackPanel>
+
+                        <TextBlock Text="(Biểu đồ minh họa - có thể thay bằng chart thật hoặc binding động)"
+                                   FontSize="11"
+                                   Foreground="#A0AEC0"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Top"
+                                   Margin="0,6,0,0"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <!-- ===== BÊN PHẢI: BẢNG TỔNG HỢP THEO MỐC THỜI GIAN ===== -->
+            <Border Grid.Column="2"
+                    Background="White"
+                    CornerRadius="12"
+                    BorderBrush="#D0D9E2"
+                    BorderThickness="1"
+                    Padding="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="Bảng thống kê theo mốc thời gian"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Foreground="#2D3748"
+                               Margin="0,0,0,8"/>
+
+                    <DataGrid Grid.Row="1"
+                              ItemsSource="{Binding StatisticsItems}"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              IsReadOnly="True"
+                              HeadersVisibility="Column"
+                              GridLinesVisibility="Horizontal">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mốc thời gian" Binding="{Binding Label}"        Width="*" />
+                            <DataGridTextColumn Header="Lượt xe vào"   Binding="{Binding VehicleCount}" Width="*" />
+                            <DataGridTextColumn Header="Thu nhập"      Binding="{Binding Revenue}"      Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+
+        </Grid>
+
+    </Grid>
+</UserControl>
